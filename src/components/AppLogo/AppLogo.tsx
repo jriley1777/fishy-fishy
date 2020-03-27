@@ -9,12 +9,17 @@ const StyledText = styled.h1.attrs({
     display: flex;
     position: absolute;
     bottom: 0;
-    right: 100px;
+    right: 40px;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-end;
-    font-size: 100px;
+    font-size: 40px;
     color: white;
+
+    @media (min-width: 768px) {
+        font-size: 100px;
+        right: 100px;
+    }
 `;
 
 interface ALType {
