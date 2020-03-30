@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 
 import Header from '../Header/Header';
+import Button from '../Button/Button';
 import TextInput from '../TextInput/TextInput';
 import AppLogo from '../AppLogo/AppLogo';
 import Processing from '../Processing/Processing';
@@ -22,28 +23,6 @@ const StyledApp = styled.div.attrs({
   text-align: center;
 `;
 
-const StyledResetButton = styled.button.attrs({
-  className: "ResetButton"
-})`
-  // height: 1.5rem;
-  font-size: 1.25rem;
-  padding: 10px;
-  border-radius: 50px;
-  width: 20vw;
-  background: white;
-  position: absolute;
-  top: 45vh;
-  left: 40vw;
-  outline: none;
-  border: none;
-  box-shadow: 1px 1px 5px black;
-
-  &:active {
-    background: #ddd;
-    box-shadow: 1px 1px 2px black;
-  }
-`;
-
 const App = (props: any) => {
   let { activeTerm, clearActiveTerm } = props;
   const [gameOver, setGameOver] = useState(false);
@@ -51,7 +30,7 @@ const App = (props: any) => {
 
   const renderResetButton = () => {
     return gameOver ? (
-      <StyledResetButton onClick={() => setShouldReset(true)}>Reset</StyledResetButton>
+      <Button onClick={() => setShouldReset(true)}>Reset</Button>
     ) : null;
   }
   return (
