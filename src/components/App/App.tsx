@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from "redux";
+import { useSelector, useDispatch } from 'react-redux';
 
 import Header from '../Header/Header';
 import Button from '../Button/Button';
@@ -23,14 +22,18 @@ const StyledApp = styled.div.attrs({
   text-align: center;
 `;
 
-const App = (props: any) => {
-  let { activeTerm, clearActiveTerm } = props;
-  const [gameOver, setGameOver] = useState(false);
-  const [shouldReset, setShouldReset] = useState(false);
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const [shouldReset, setShouldReset] = useState<boolean>(false);
+  const activeTerm: string = useSelector(Selectors.getActiveTerm);
+  const clearActiveTerm: () => void = dispatch(AppActions.clearActiveTerm);
 
   const renderResetButton = () => {
     return gameOver ? (
-      <Button onClick={() => setShouldReset(true)}>Reset</Button>
+      <Button onClick={() => setShouldReset(true)}>
+        Reset
+      </Button>
     ) : null;
   }
   return (
@@ -56,14 +59,4 @@ const App = (props: any) => {
   );
 }
 
-const mapStateToProps = (state: any) => ({
-  activeTerm: Selectors.getActiveTerm(state)
-});
-
-const mapDispatchToProps = (dispatch: any) => {
-  return bindActionCreators({
-    clearActiveTerm: AppActions.clearActiveTerm
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

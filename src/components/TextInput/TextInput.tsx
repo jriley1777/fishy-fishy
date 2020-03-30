@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import * as Selectors from '../../selectors/index';
 import * as AppActions from '../../actions/app';
@@ -25,32 +24,28 @@ const StyledInput = styled.input.attrs({
   }
 `;
 
-const TextInput = (props: any) => {
-    let { setActiveTerm, activeTerm } = props;
-    const handleChange = (e: any) => {
-        return setActiveTerm(e.target.value);
+const TextInput: React.FC = () => {
+    const dispatch = useDispatch();
+    const setActiveTerm: (term: string) => void = dispatch(AppActions.setActiveTerm);
+    const activeTerm: string = useSelector(Selectors.getActiveTerm);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleChange = (e: React.FormEvent) => {
+      e.preventDefault();
+      return setActiveTerm(inputRef.current!.value);
     };
 
     return (
-      <div>
-        <StyledInput 
-            type="text" 
-            placeholder="see a fishy? type the fishy"
-            onChange={handleChange} 
-            value={activeTerm}
+      <form>
+        <StyledInput
+          type="text"
+          placeholder="see a fishy? type the fishy"
+          onChange={handleChange}
+          value={activeTerm}
+          ref={inputRef}
         />
-      </div>
+      </form>
     );
 };
 
-const mapStateToProps = (state: any) => ({
-    activeTerm: Selectors.getActiveTerm(state)
-})
-
-const mapDispatchToProps = (dispatch: any) => {
-    return bindActionCreators({
-        setActiveTerm: AppActions.setActiveTerm
-    }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TextInput);
+export default TextInput;

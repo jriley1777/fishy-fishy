@@ -16,7 +16,11 @@ const StyledHeader = styled.div.attrs({
     z-index: 3;
 `;
 
-const Header = ({ children }: any) => {
+interface HeaderProps {
+    children: React.ReactNode
+}
+
+const Header: React.FC<HeaderProps> = ({ children }) => {
     return (
         <StyledHeader>{ children }</StyledHeader>
     )
