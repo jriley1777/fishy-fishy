@@ -15,10 +15,11 @@ const StyledText = styled.h1.attrs({
     align-items: flex-end;
     font-size: 40px;
     color: white;
+    pointer-events: none;
 
     @media (min-width: 768px) {
-        font-size: 100px;
-        right: 100px;
+        font-size: 70px;
+        right: 70px;
     }
 `;
 

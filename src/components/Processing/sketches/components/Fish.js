@@ -1,7 +1,7 @@
 import Point from './Point';
 
 class Fish {
-  constructor(p, w, h) {
+  constructor(p, w, h, word) {
     this.p = p;
     this.w = w;
     this.h = h;
@@ -17,8 +17,52 @@ class Fish {
       this.arr.push(new Point(this.p, this.startX, this.startY));
     }
     this.leadPoint = new Point(this.p, this.startX, this.startY);
+    this.hasControls = false;
+    this.move = {
+      up: false,
+      down: false,
+      left: false,
+      right: false
+    };
+    this.velocity = {
+      x: 0,
+      y: 0,
+    }
+    this.word = word;
+    this.substring = '';
+    this.isComplete = false;
+  }
+  setHasControls = (hasControls) => {
+    this.hasControls = hasControls;
+  }
+  update = function (){
+    if(!this.hasControls) return false;
+    let speed = 2.5;
+    let { up, down, left, right } = this.move;
+    if (up) this.velocity.y = -speed;
+    if (down) this.velocity.y = speed;
+    if (left) this.velocity.x = -speed;
+    if (right) this.velocity.x = speed;
+    if(this.velocity.x){
+      this.leadPoint.x += this.velocity.x/2; 
+    }
+  }
+  displayWord = function() {
+    this.p.fill(0);
+    this.p.strokeWeight(1);
+    this.p.stroke(255);
+    this.p.textSize(26);
+    this.p.text(this.word, this.leadPoint.x, this.leadPoint.y - 20);
+
+    this.p.fill(255,0,0);
+    this.p.text(this.substring, this.leadPoint.x, this.leadPoint.y - 20);
+    this.p.noStroke();
   }
   display = function() {
+    if(this.isComplete) {
+      this.word = 'BYE BYE';
+      return this.p.text(this.word, this.leadPoint.x, this.leadPoint.y - 20);
+    }
     for (let i = 0; i < this.arr.length; i++) {
       let tog = (this.arr[i].toggle * (this.maxArray - i)) / this.maxArray;
       if (
@@ -41,7 +85,7 @@ class Fish {
           255
         );
         this.baseCol = this.p.color(this.adjCol, 0, this.adjCol2);
-        this.baseCol.setAlpha(100);
+        this.baseCol.setAlpha(i*10);
         this.p.strokeWeight(i);
         this.p.stroke(this.baseCol);
         this.p.line(
@@ -69,8 +113,10 @@ class Fish {
     if (this.arr.length > this.maxArray) {
       this.arr.shift();
     } else {
-      this.leadPoint.x += this.p.random(-1,-10)//(this.p.random(this.p.mouseX) - this.leadPoint.x) / 80;
-      this.leadPoint.y += this.p.random(1,3)//(this.p.mouseY - this.leadPoint.y) / 80;
+      if(!this.hasControls || !Object.values(this.move).includes(true)){
+       this.leadPoint.x += this.p.random(-1, -10); //(this.p.random(this.p.mouseX) - this.leadPoint.x) / 80;
+       this.leadPoint.y += this.p.random(1, 3); //(this.p.mouseY - this.leadPoint.y) / 80;
+      }
       this.arr.push(
         new Point(
           this.p,
@@ -81,6 +127,8 @@ class Fish {
       );
       this.toggle = -this.toggle;
     }
+    this.update();
+    this.displayWord();
   };
 }
 

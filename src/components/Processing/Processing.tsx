@@ -17,10 +17,11 @@ const P5Container = styled.div.attrs({
 `;
 
 interface ProcessingTypes {
-    sketch: any
+    sketch: any,
+    p5Props: any
 }
 
-const Processing: React.FC<ProcessingTypes> = ({ sketch }) => {
+const Processing: React.FC<ProcessingTypes> = ({ sketch, p5Props }) => {
     const canvasRef: any = useRef();
 
     useEffect(() => {
@@ -30,6 +31,10 @@ const Processing: React.FC<ProcessingTypes> = ({ sketch }) => {
         );
         return () => canvasRef && canvasRef.current.remove();
     }, [sketch]);
+
+    useEffect(() => {
+      canvasRef.current.props = p5Props;
+    }, [p5Props])
     
 
     return (
