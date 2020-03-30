@@ -26,11 +26,13 @@ const StyledInput = styled.input.attrs({
 
 const TextInput: React.FC = () => {
     const dispatch = useDispatch();
-    const setActiveTerm: (term: string) => void = dispatch(AppActions.setActiveTerm);
     const activeTerm: string = useSelector(Selectors.getActiveTerm);
+    const setActiveTerm: (term: string) => void = (term) =>
+          dispatch(AppActions.setActiveTerm(term));
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleChange = (e: React.FormEvent) => {
+      console.log('hello');
       e.preventDefault();
       return setActiveTerm(inputRef.current!.value);
     };

@@ -27,7 +27,7 @@ const App: React.FC = () => {
   const [gameOver, setGameOver] = useState<boolean>(false);
   const [shouldReset, setShouldReset] = useState<boolean>(false);
   const activeTerm: string = useSelector(Selectors.getActiveTerm);
-  const clearActiveTerm: () => void = dispatch(AppActions.clearActiveTerm);
+  const clearActiveTerm: () => any = () => dispatch(AppActions.clearActiveTerm());
 
   const renderResetButton = () => {
     return gameOver ? (
