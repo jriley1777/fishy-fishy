@@ -22,18 +22,17 @@ interface ProcessingTypes {
 }
 
 const Processing: React.FC<ProcessingTypes> = ({ sketch, p5Props }) => {
-    const canvasRef: any = useRef();
-
+    const canvasRef = useRef<any>();
     useEffect(() => {
         canvasRef.current = new p5(
           sketch,
           document.getElementById("P5Container") || undefined
         );
-        return () => canvasRef && canvasRef.current.remove();
+        return () => canvasRef && canvasRef.current!.remove();
     }, [sketch]);
 
     useEffect(() => {
-      canvasRef.current.props = p5Props;
+      canvasRef.current!.props = p5Props;
     }, [p5Props])
     
 

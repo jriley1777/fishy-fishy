@@ -24,7 +24,7 @@ const StyledText = styled.h1.attrs({
 `;
 
 interface ALType {
-    children: any
+    children: React.ReactNode
 }
 
 const AppLogo: React.FC<ALType> = ({ children }) => {

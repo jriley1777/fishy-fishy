@@ -24,8 +24,8 @@ const StyledButton = styled.button.attrs({
 `;
 
 interface ButtonTypes {
-    onClick: () => any,
-    children?: any
+    onClick: (...args: any) => any,
+    children?: React.ReactNode
 }
 
 const Button: React.FC<ButtonTypes> = ({ onClick, children }) => {
