@@ -1,18 +1,13 @@
-import { Store, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore } from "@reduxjs/toolkit";
 
 import rootReducer from "../reducers/index";
 
-const configureStore = (
-  initialState?: any
-): Store<any> => {
-  const store = createStore(
-    rootReducer,
-    initialState || {},
-    composeWithDevTools()
-  );
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: true
+});
 
-  return store;
-};
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
 
-export default configureStore;
+export default store;

@@ -33,7 +33,7 @@ const Processing: React.FC<ProcessingTypes> = ({ sketch, p5Props }) => {
 
     useEffect(() => {
       canvasRef.current!.props = p5Props;
-    }, [p5Props])
+    }, [p5Props]);
     
 
     return (
