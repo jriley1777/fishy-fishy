@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import app from './app';
+import typingReducer from '../features/typeBar/activeTermSlice';
 
 export default combineReducers({
-    app
+  app: typingReducer
 });

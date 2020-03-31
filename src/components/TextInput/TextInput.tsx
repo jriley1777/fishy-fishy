@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as Selectors from '../../selectors/index';
-import * as AppActions from '../../actions/app';
+import * as AppActions from '../../features/typeBar/activeTermSlice';
 
 const StyledInput = styled.input.attrs({
   className: "TextInput"
@@ -26,19 +26,17 @@ const StyledInput = styled.input.attrs({
 
 const TextInput: React.FC = () => {
     const dispatch = useDispatch();
-    const activeTerm: string = useSelector(Selectors.getActiveTerm);
+    const activeTerm: string = useSelector(Selectors.getActiveTerm) || '';
     const setActiveTerm: (term: string) => void = (term) =>
-          dispatch(AppActions.setActiveTerm(term));
+          dispatch(AppActions.setActiveTerm({term}));
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const handleChange = (e: React.FormEvent) => {
-      console.log('hello');
-      e.preventDefault();
+    const handleChange = (e: any) => {
       return setActiveTerm(inputRef.current!.value);
     };
 
     return (
-      <form>
+      <>
         <StyledInput
           type="text"
           placeholder="see a fishy? type the fishy"
@@ -46,7 +44,7 @@ const TextInput: React.FC = () => {
           value={activeTerm}
           ref={inputRef}
         />
-      </form>
+      </>
     );
 };
 

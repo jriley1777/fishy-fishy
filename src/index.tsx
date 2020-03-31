@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App/App';
+import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import configureStore from './utils/redux';
+import store from './utils/redux';
 
 document.title = "Fishy learns to type!";
 
 
 const Root = () => {
-  const store = configureStore();
   return (
     <Provider store={store}>
       <App />
