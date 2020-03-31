@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Header from '../Header/Header';
-import Button from '../Button/Button';
-import TextInput from '../TextInput/TextInput';
-import AppLogo from '../AppLogo/AppLogo';
-import Processing from '../Processing/Processing';
-import sketch from '../Processing/sketches/koiPond';
+import Header from '../components/Header/Header';
+import Button from '../components/Button/Button';
+import TextInput from '../components/TextInput/TextInput';
+import AppLogo from '../components/AppLogo/AppLogo';
+import Processing from '../components/Processing/Processing';
+import sketch from '../components/Processing/sketches/koiPond';
 
-import * as Selectors from '../../selectors/index';
-import * as AppActions from '../../actions/app';
+import * as Selectors from '../selectors/index';
+import * as AppActions from '../features/typeBar/activeTermSlice';
 
 const StyledApp = styled.div.attrs({
   className: 'App'

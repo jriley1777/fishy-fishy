@@ -1,6 +1,0 @@
-
-
-export const ACTIONS = {
-    SET_ACTIVE_TERM: 'SET_ACTIVE_TERM',
-    CLEAR_ACTIVE_TERM: 'CLEAR_ACTIVE_TERM'
-}
